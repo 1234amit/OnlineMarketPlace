@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+    <h1 class="text-center">Login</h1>
+    <br/>
+    
+    <form method="POST" action="#" class="border rounded p-3" style="max-width: 400px; margin: 0 auto;">
+        {% csrf_token %}
+    
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" class="form-control" name="username" id="username" placeholder="Enter your username" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+      
+    
+    </form>
+  </div>
+{% endblock content %}

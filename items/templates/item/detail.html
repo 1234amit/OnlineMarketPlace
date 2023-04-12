@@ -1,0 +1,68 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+<h2>This is a Details Page</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="{{ item.image.url }}" class="img-thumbnail" style="height: 300px;">
+        </div>
+        <div class="col-md-8">
+            <h1 class="mb-5" style="text-transform: uppercase;">{{item.name}}</h1>
+            <p class="" style="color:rgb(126, 133, 133);"><strong>Price: </strong>{{ item.price }}</p>
+            <p style="color:rgb(126, 133, 133);"><strong>Seller: </strong>{{ item.created_by.username }}</p>
+
+            {% if item.description %}
+                <p class="text-gray-700">
+                    <strong class="text-gray-500">Description:</strong><br>
+                    {{ item.description }}
+                </p>
+            {% endif %}
+
+            {% if request.user == item.created_by %}
+            <div class="mt-6 p-6 bg-white rounded-xl">
+                <p>This is your item!</p>
+
+                <a href="{% url 'items:edit' item.id %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'items:delete' item.id %}" class="btn btn-danger">Delete</a>
+            </div>
+            {% else %}  
+                <a href="{% url 'conversation:new' item.id %}" class="d-inline-block mt-3 px-4 py-2 fs-5 fw-semibold bg-primary text-white rounded-3 hover:bg-primary-dark">Contact seller</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row mb-5 mt-5">
+        <h2 class="text-center">Related items</h2>
+
+        {% for item in related_items %}
+        <div class="col-md-4">
+            <a href="{% url 'items:detail' item.id %}" style="text-decoration: none; color: black;">
+            <div class="card">
+                <img class="card-img-top" src="{{item.image.url}}" alt="Card image cap" style="height:210px">
+                <div class="card-body">
+                  <h5 class="card-title itemTitle" style="text-decoration: none; text-transform: capitalize; color: black;">{{item.name}}</h5>
+                  <p class="card-text">{{item.description|truncatechars:20}}</p>
+                </div>
+                <div class="card-footer">
+                  <div class="row">
+                    <div class="col-md-10">
+                        <p style="font-weight: 600;">Price: ${{item.price}}</p>
+                    </div>
+                    <div class="col-md-2">
+                        
+                    </div>
+                  </div>
+                </div>
+            </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+
+
+{% endblock content %}

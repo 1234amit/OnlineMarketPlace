@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row mb-5">
+        <h2 class="text-center mb-5">My items</h2>
+
+        {% for item in items %}
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'items:detail' item.id %}" style="text-decoration: none; color: black;">
+            <div class="card">
+                <img class="card-img-top" src="{{item.image.url}}" alt="Card image cap" style="height:210px">
+                <div class="card-body">
+                  <h5 class="card-title itemTitle" style="text-decoration: none; text-transform: capitalize; color: black;">{{item.name}}</h5>
+                  <p class="card-text">{{item.description|truncatechars:20}}</p>
+                </div>
+                <div class="card-footer">
+                  <div class="row">
+                    <div class="col-md-10">
+                        <p style="font-weight: 600;">Price: ${{item.price}}</p>
+                    </div>
+                    <div class="col-md-2">
+                        
+                    </div>
+                  </div>
+                </div>
+            </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock content %}

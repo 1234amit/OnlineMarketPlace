@@ -1,0 +1,55 @@
+.form-area{
+    padding-top: 5%;
+}
+
+.row.single-form{
+    box-shadow: 0 2px 20px -5px rgba(0,0,0,0.5);
+}
+
+.left{
+    background: blueviolet;
+    padding: 200px 93px;
+}
+
+.left h2{
+    color: #fff;
+    font-weight: 700;
+    font-size: 48px;
+}
+
+.left h2 span{
+    font-weight: 100;
+}
+
+.right{
+    padding: 70px 100px;
+    position: relative;
+}
+
+.right i{
+    position: absolute;
+    font-size: 80px;
+    left: -27px;
+    top: 40%;
+}
+
+.form-control{
+    border: 2px solid #000;
+}
+
+.right button{
+    border: none;
+    border-radius: 0;
+    background: #252525;
+    width: 180px;
+    color: #fff;
+    padding: 15px 0;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.itemTitle{
+    text-transform: uppercase;
+}

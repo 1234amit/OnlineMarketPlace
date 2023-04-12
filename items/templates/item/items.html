@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="pb-6 row g-4 bg-gray-100">
+    <div class="col-md-3">
+        <form method="get" action="{% url 'items:itemsSearch' %}">
+            <input name="query" class="w-100 py-2 px-6 border rounded-xl" type="text" value="{{ query }}" placeholder="Find a bike, a chair or car...">
+
+            <button class="mt-3 btn btn-secondary">Search</button>
+        </form>
+
+        <hr class="my-6">
+
+        <p class="font-weight-bold">Categories</p>
+
+        <ul class="list-unstyled">
+            {% for category in categories %}
+                <li class="py-2 px-2 rounded-xl{% if category.id == category_id %} bg-light {% endif %}" style="color:black;">
+                    <a class="categoryName" href="{% url 'items:itemsSearch' %}?query={{ query }}&category={{ category.id }}" style="text-decoration: none; color: black; font-weight: 400; font-size: 20px;">{{ category.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <hr class="my-6">
+
+        <p class="font-weight-bold">Clear filters</p>
+
+        <ul class="list-unstyled">
+            <li><a href="{% url 'items:itemsSearch' %}" class="btn btn-outline-warning btn-lg">Clear</a></li>
+        </ul>
+    </div>
+
+    <div class="col-md-9">
+        <div class="row row-cols-3 g-4">
+            {% for item in items %}
+                <div class="col-md-4 mb-4">
+                    <a href="{% url 'items:detail' item.id %}" style="text-decoration: none; color: black;">
+                    <div class="card">
+                        <img class="card-img-top" src="{{item.image.url}}" alt="Card image cap" style="height:210px">
+                        <div class="card-body">
+                        <h5 class="card-title itemTitle" style="text-decoration: none; text-transform: capitalize; color: black;">{{item.name}}</h5>
+                        <p class="card-text">{{item.description|truncatechars:20}}</p>
+                        </div>
+                        <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <p style="font-weight: 600;">Price: ${{item.price}}</p>
+                            </div>
+                            <div class="col-md-2">
+                                
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
